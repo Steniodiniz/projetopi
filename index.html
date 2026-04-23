@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Estratégico | Clube de Assinatura PI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #1e293b; scroll-behavior: smooth; }
+        .card-decision { background: #ffffff; border: 1px solid #e2e8f0; transition: all 0.3s ease; }
+        .card-decision:hover { border-color: #3b82f6; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05); }
+        .bg-grid { background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 25px 25px; }
+        .drawer-transition { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .modal-open { overflow: hidden; }
+        .text-glow { text-shadow: 0 0 15px rgba(37, 99, 235, 0.1); }
+        .flow-arrow { color: #cbd5e1; font-size: 1.5rem; line-height: 1; }
+    </style>
+</head>
+<body class="antialiased min-h-screen bg-grid pb-20">
+
+    <!-- Navbar Executiva -->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200 px-8 py-5 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div>
+                <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest text-glow">Intelligence System v4.5</span>
+                <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">Club <span class="text-slate-400 font-light">PI</span></h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button onclick="openDrawer()" class="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold py-2.5 px-6 rounded-full transition-all shadow-lg shadow-blue-200">
+                    ANÁLISE DE ESCALA
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6 md:p-8 space-y-8">
+
+        <!-- 1. Visualização do Fluxo de Receita -->
+        <section class="card-decision rounded-[2rem] p-8 shadow-sm">
+            <h3 class="text-center text-slate-400 font-bold text-[10px] uppercase tracking-[0.2em] mb-10">Dinâmica do Fluxo de Receita</h3>
+            <div class="flex flex-col items-center">
+                <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-xl w-64 text-center border-b-4 border-blue-500">
+                    <p class="text-[10px] uppercase font-bold text-slate-400 mb-1">Entrada Mensal</p>
+                    <p class="text-2xl font-black italic tracking-tighter">CLUBE (Assinante)</p>
+                    <p class="text-lg font-bold text-blue-400 mt-1">R$ 297,00</p>
+                </div>
+                <div class="flex justify-center w-full max-w-4xl relative h-16">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 h-full w-[2px] bg-slate-200"></div>
+                    <div class="absolute bottom-0 left-[15%] right-[15%] h-[2px] bg-slate-200"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl mt-4">
+                    <div class="flex flex-col items-center">
+                        <div class="flow-arrow mb-2">↓</div>
+                        <div class="card-decision p-4 rounded-xl w-full text-center border-t-4 border-amber-400">
+                            <p class="font-bold text-sm text-slate-800">Representante</p>
+                            <p class="text-xs text-slate-500 mt-1">Comissão Variável</p>
+                            <p class="text-sm font-black text-amber-600 mt-2">20% → 0%</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="flow-arrow mb-2">↓</div>
+                        <div class="card-decision p-4 rounded-xl w-full text-center border-t-4 border-blue-500 bg-blue-50/30">
+                            <p class="font-bold text-sm text-slate-800">Gestão e Taxas</p>
+                            <p class="text-xs text-slate-500 mt-1">Fixo + Tributário</p>
+                            <p class="text-sm font-black text-blue-600 mt-2">11% Total</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="flow-arrow mb-2">↓</div>
+                        <div class="card-decision p-4 rounded-xl w-full text-center border-t-4 border-emerald-500">
+                            <p class="font-bold text-sm text-slate-800">Execução Técnica</p>
+                            <p class="text-xs text-slate-500 mt-1">Registro Simplificado</p>
+                            <p class="text-sm font-black text-emerald-600 mt-2">R$ 1.200 (Unit)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. KPIs de Impacto Rápido -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="card-decision rounded-3xl p-6 border-l-4 border-blue-600">
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Payback</p>
+                <p class="text-2xl font-black">5 Meses</p>
+            </div>
+            <div class="card-decision rounded-3xl p-6 border-l-4 border-emerald-500">
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">ROI Ano 1</p>
+                <p class="text-2xl font-black">978%</p>
+            </div>
+            <div class="card-decision rounded-3xl p-6 border-l-4 border-slate-300">
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Churn Alvo</p>
+                <p class="text-2xl font-black text-amber-600">5.0%</p>
+            </div>
+            <div class="card-decision rounded-3xl p-6 bg-slate-900 text-white border-none shadow-lg">
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Lucro M18</p>
+                <p class="text-2xl font-black text-emerald-400">R$ 2.48M</p>
+            </div>
+        </section>
+
+        <!-- 3. Problema vs Solução -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="card-decision rounded-3xl p-8">
+                <h3 class="font-bold text-lg mb-6 flex items-center">⚠️ Desafio do Cliente</h3>
+                <div class="space-y-4">
+                    <div class="bg-red-50 p-4 rounded-xl border border-red-100">
+                        <p class="text-sm text-red-800">Custo unitário de marca (R$ 1.8k) impede a proteção de ativos em 80% das PMEs.</p>
+                    </div>
+                    <div class="flex justify-center text-slate-300">▼</div>
+                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 font-bold text-emerald-800 text-sm">
+                        O Clube dilui o custo e gera receita recorrente com monitoramento vitalício.
+                    </div>
+                </div>
+            </div>
+            <div class="card-decision rounded-3xl p-8">
+                <h3 class="font-bold text-lg mb-6">Eficiência do Modelo (SaaS + Service)</h3>
+                <div class="h-[200px]">
+                    <canvas id="chartRevenueMix"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Gráfico de Escala com Gatilho para Detalhamento -->
+        <section class="card-decision rounded-[2rem] p-8 cursor-pointer group" onclick="openDrawer()">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <h3 class="font-bold text-xl text-slate-900 tracking-tight">Escalabilidade Comercial</h3>
+                    <p class="text-sm text-slate-500">Correlação entre Faturamento e Expansão da Força de Vendas</p>
+                </div>
+                <span class="bg-blue-100 text-blue-600 text-[10px] font-bold px-4 py-2 rounded-full group-hover:bg-blue-600 group-hover:text-white transition-all">CLIQUE PARA DETALHAMENTO MÊS A MÊS</span>
+            </div>
+            <div class="h-[380px]">
+                <canvas id="scalingChart"></canvas>
+            </div>
+        </section>
+
+        <!-- 5. Detalhamento de Custos Operacionais -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="card-decision rounded-3xl p-8 border-l-4 border-slate-900">
+                <h3 class="font-bold text-lg mb-6 flex items-center">
+                    <span class="mr-2">📂</span> Estrutura de Custos Fixos
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-100">
+                        <span class="text-sm font-medium text-slate-600">Plataformas Digitais</span>
+                        <span class="font-bold text-slate-900">R$ 3.000</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-100">
+                        <span class="text-sm font-medium text-slate-600">Administrativo e Contabilidade</span>
+                        <span class="font-bold text-slate-900">R$ 2.000</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-slate-50 rounded-xl border border-slate-100">
+                        <span class="text-sm font-medium text-slate-600">Marketing e Eventos</span>
+                        <span class="font-bold text-slate-900">R$ 1.000</span>
+                    </div>
+                    <div class="flex justify-between items-center p-5 bg-blue-600 rounded-xl text-white shadow-lg shadow-blue-200">
+                        <span class="font-bold uppercase text-[10px] tracking-widest">Total OpEx Fixo</span>
+                        <span class="text-xl font-black italic">R$ 6.000<small class="text-[10px] font-normal ml-1">/mês</small></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-decision rounded-3xl p-8 border-l-4 border-blue-500">
+                <h3 class="font-bold text-lg mb-6 flex items-center">
+                    <span class="mr-2">⚙️</span> Custos Variáveis Unitários
+                </h3>
+                <div class="space-y-5">
+                    <div class="p-4 rounded-xl border border-blue-100 bg-blue-50/50">
+                        <p class="text-xs font-bold text-blue-600 uppercase mb-2">Impostos</p>
+                        <p class="text-sm text-slate-600">Alíquota inicial de <span class="font-bold text-slate-900">6%</span> (Simples Nacional).</p>
+                    </div>
+                    <div class="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                        <p class="text-xs font-bold text-slate-500 uppercase mb-2">Execução Técnica</p>
+                        <p class="text-sm text-slate-600">Parceria Registro Simplificado: <span class="font-bold text-slate-900">R$ 1.200</span> (2x R$ 600).</p>
+                    </div>
+                    <div class="p-4 rounded-xl border border-amber-100 bg-amber-50/50">
+                        <p class="text-xs font-bold text-amber-600 uppercase mb-2">Gestão Comercial</p>
+                        <p class="text-sm text-slate-600">Comissão de performance do gestor: <span class="font-bold text-slate-900">5% fixo</span>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. NOVO: Fluxo de Caixa Detalhado (Primeiro Ano) -->
+        <section class="card-decision rounded-3xl overflow-hidden shadow-sm border-b-8 border-blue-600">
+            <div class="bg-slate-900 px-8 py-5 text-white flex justify-between items-center">
+                <h3 class="font-bold text-sm uppercase tracking-widest">Fluxo de Caixa Detalhado (M1 - M12)</h3>
+                <span class="text-[10px] font-bold text-slate-400 italic">Valores em R$</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-500 uppercase font-bold border-b border-slate-200">
+                            <th class="px-6 py-4">Mês</th>
+                            <th class="px-6 py-4">Ativos</th>
+                            <th class="px-6 py-4">Rec. Bruta</th>
+                            <th class="px-6 py-4">Custos Var.</th>
+                            <th class="px-6 py-4">Custos Fixos</th>
+                            <th class="px-6 py-4">Resultado</th>
+                            <th class="px-6 py-4">Acumulado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-50">
+                        <!-- Gerado dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="bg-slate-50 p-6 border-t border-slate-200">
+                <div class="flex items-center text-[10px] text-slate-400 gap-4">
+                    <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-red-400 mr-1"></span> Pico de Risco: Mês 3</span>
+                    <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-emerald-400 mr-1"></span> Break-even: Mês 5</span>
+                    <span class="flex items-center font-bold text-blue-600 underline">ROI Projetado (12m): 978%</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Deep Dive Drawer -->
+    <div id="drawerOverlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[60] hidden" onclick="closeDrawer()"></div>
+    <div id="detailDrawer" class="fixed top-0 right-0 h-full w-full md:w-[600px] bg-white z-[70] shadow-2xl translate-x-full drawer-transition overflow-y-auto">
+        <div class="p-8">
+            <div class="flex justify-between items-center mb-8 border-b pb-6">
+                <div>
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tight text-glow">Performance Mensal</h2>
+                    <p class="text-sm text-slate-500 italic">Expansão da rede e faturamento</p>
+                </div>
+                <button onclick="closeDrawer()" class="p-2 hover:bg-slate-100 rounded-full text-slate-400 transition-colors">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+
+            <div class="space-y-6">
+                <div class="overflow-hidden border border-slate-100 rounded-2xl shadow-sm">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-900 text-slate-400 font-bold uppercase">
+                            <tr>
+                                <th class="p-4">Mês</th>
+                                <th class="p-4">Equipe</th>
+                                <th class="p-4 text-right">Faturamento</th>
+                            </tr>
+                        </thead>
+                        <tbody id="drawerTableBody" class="divide-y divide-slate-100">
+                            <!-- JS Inject -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados do Fluxo de Caixa Detalhado
+        const cashFlowData = [
+            { m: 1, act: 12, rev: 3564, cVar: 3792, cFix: 6000, res: -6228, acum: -6228 },
+            { m: 2, act: 32, rev: 9504, cVar: 2575, cFix: 6000, res: -941, acum: -7169 },
+            { m: 3, act: 70, rev: 20790, cVar: 13440, cFix: 6000, res: -1897, acum: -9066 },
+            { m: 4, act: 130, rev: 38610, cVar: 23031, cFix: 6000, res: 4662, acum: -4404 },
+            { m: 5, act: 214, rev: 63558, cVar: 41178, cFix: 6000, res: 9967, acum: 5563 },
+            { m: 6, act: 323, rev: 95931, cVar: 63697, cFix: 6000, res: 16578, acum: 22141 },
+            { m: 7, act: 457, rev: 135729, cVar: 90686, cFix: 6000, res: 26999, acum: 49140 },
+            { m: 8, act: 614, rev: 182358, cVar: 121518, cFix: 6000, res: 40299, acum: 89439 },
+            { m: 9, act: 803, rev: 238491, cVar: 154425, cFix: 6000, res: 58557, acum: 147996 },
+            { m: 10, act: 1023, rev: 303831, cVar: 190192, cFix: 6000, res: 84409, acum: 232405 },
+            { m: 11, act: 1282, rev: 380754, cVar: 235838, cFix: 6000, res: 110571, acum: 342976 },
+            { m: 12, act: 1588, rev: 471636, cVar: 285682, cFix: 6000, res: 146156, acum: 489132 }
+        ];
+
+        // Populate Cash Flow Table
+        const cfTbody = document.querySelector('tbody.divide-y.divide-slate-50');
+        cashFlowData.forEach(row => {
+            const resClass = row.res < 0 ? 'text-red-500 font-bold' : 'text-emerald-600 font-bold';
+            const acumClass = row.acum < 0 ? 'bg-red-50 text-red-700 font-black' : 'bg-emerald-50 text-emerald-700 font-black';
+            const rowHighlight = row.m === 5 ? 'bg-blue-50/50 ring-1 ring-blue-100' : '';
+            
+            cfTbody.innerHTML += `
+                <tr class="hover:bg-slate-50 transition-colors ${rowHighlight}">
+                    <td class="px-6 py-4 font-bold text-slate-500">Mês ${row.m}</td>
+                    <td class="px-6 py-4">${row.act}</td>
+                    <td class="px-6 py-4 font-semibold">R$ ${row.rev.toLocaleString()}</td>
+                    <td class="px-6 py-4 text-slate-400">R$ ${row.cVar.toLocaleString()}</td>
+                    <td class="px-6 py-4 text-slate-400">R$ ${row.cFix.toLocaleString()}</td>
+                    <td class="px-6 py-4 ${resClass}">R$ ${row.res.toLocaleString()}</td>
+                    <td class="px-6 py-4 ${acumClass}">R$ ${row.acum.toLocaleString()}</td>
+                </tr>
+            `;
+        });
+
+        const tableData = [
+            { m: 1, r: 2, rev: "3.564" },
+            { m: 3, r: 5, rev: "20.790" },
+            { m: 6, r: 12, rev: "95.931" },
+            { m: 9, r: 22, rev: "238.491" },
+            { m: 12, r: 37, rev: "471.636" },
+            { m: 18, r: 90, rev: "1.409.859" }
+        ];
+
+        const tbody = document.getElementById('drawerTableBody');
+        tableData.forEach(row => {
+            tbody.innerHTML += `
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="p-4 font-bold text-slate-700 decoration-blue-200 underline">Mês ${row.m}</td>
+                    <td class="p-4 font-medium">${row.r} Representantes</td>
+                    <td class="p-4 text-right font-black text-slate-900">R$ ${row.rev}</td>
+                </tr>
+            `;
+        });
+
+        function openDrawer() {
+            document.getElementById('detailDrawer').classList.remove('translate-x-full');
+            document.getElementById('drawerOverlay').classList.remove('hidden');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeDrawer() {
+            document.getElementById('detailDrawer').classList.add('translate-x-full');
+            document.getElementById('drawerOverlay').classList.add('hidden');
+            document.body.classList.remove('modal-open');
+        }
+
+        const commonPlugins = {
+            legend: { labels: { font: { family: 'Plus Jakarta Sans', weight: '700', size: 10 } } }
+        };
+
+        new Chart(document.getElementById('chartRevenueMix'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Custos Variáveis', 'Impostos (6%)', 'Margem/Comissão Sócios', 'Custos Fixos'],
+                datasets: [{
+                    data: [60, 6, 25, 9],
+                    backgroundColor: ['#2563eb', '#94a3b8', '#10b981', '#f1f5f9'],
+                    borderWidth: 0
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: commonPlugins }
+        });
+
+        new Chart(document.getElementById('scalingChart'), {
+            type: 'bar',
+            data: {
+                labels: ['M1', 'M3', 'M6', 'M9', 'M12', 'M18'],
+                datasets: [
+                    {
+                        label: 'Faturamento (R$)',
+                        data: [3564, 20790, 95931, 238491, 471636, 1409859],
+                        backgroundColor: '#2563eb',
+                        borderRadius: 8,
+                        order: 2,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Número de Reps',
+                        data: [2, 5, 12, 22, 37, 90],
+                        type: 'line',
+                        borderColor: '#10b981',
+                        borderWidth: 4,
+                        pointRadius: 6,
+                        pointBackgroundColor: '#fff',
+                        order: 1,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: commonPlugins,
+                scales: {
+                    y: { ticks: { callback: (v) => 'R$ ' + v.toLocaleString() } },
+                    y1: { position: 'right', grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
